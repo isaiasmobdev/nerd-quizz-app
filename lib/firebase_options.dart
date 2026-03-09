@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDOspsmUNlmp0R6tt9FMBp5aUFRzgySZoY',
+    apiKey: 'AIzaSyAQfW2_KkzSn0Hh93fFzH2WbOuzjoMGgDk',
     appId: '1:490651315379:android:51876ac618fcc6560114c6',
     messagingSenderId: '490651315379',
     projectId: 'nerd-quizz',
@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAhidw8y61xaTi0YYieh_I7u5bTKznzYF8',
+    apiKey: 'AIzaSyDpENZ_2jyQ_SwNEKVjiucHGKi-X03DohQ',
     appId: '1:490651315379:ios:f8110b9d4389bcde0114c6',
     messagingSenderId: '490651315379',
     projectId: 'nerd-quizz',
