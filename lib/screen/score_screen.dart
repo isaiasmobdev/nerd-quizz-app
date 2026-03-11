@@ -7,13 +7,28 @@ import 'package:nerd_quizz_flutter_final/screen/quizz_screen.dart';
 import 'package:nerd_quizz_flutter_final/shared/app_colors.dart';
 
 class ScoreScreen extends StatefulWidget {
-  const ScoreScreen({super.key});
+  final int score;
+  final int totalQuestions;
+
+  const ScoreScreen({
+    super.key,
+    required this.score,
+    required this.totalQuestions,
+  });
 
   @override
   State<ScoreScreen> createState() => _ScoreScreenState();
 }
 
 class _ScoreScreenState extends State<ScoreScreen> {
+  String get _feedbackMessage {
+    if (widget.totalQuestions == 0) return 'Sem perguntas!';
+    final percent = widget.score / widget.totalQuestions;
+    if (percent >= 0.8) return 'Você foi excelente!';
+    if (percent >= 0.5) return 'Bom trabalho!';
+    return 'Continue tentando!';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +39,11 @@ class _ScoreScreenState extends State<ScoreScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //Logo Quizz
               SvgPicture.asset('assets/svg/logo.svg'),
-
-              //Text Score and points
               Column(
                 children: [
                   Text(
-                    'Score',
+                    'Pontuação',
                     style: GoogleFonts.urbanist(
                       color: AppColors.white,
                       fontSize: 48,
@@ -39,19 +51,27 @@ class _ScoreScreenState extends State<ScoreScreen> {
                     ),
                   ),
                   Text(
-                    'Score',
+                    '${widget.score} / ${widget.totalQuestions}',
                     style: GoogleFonts.urbanist(
                       color: AppColors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  Text(
+                    _feedbackMessage,
+                    style: GoogleFonts.urbanist(
+                      color: AppColors.primary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
-              //PrimaryButton
               PrimaryButton(
-                label: 'Play again',
+                label: 'Jogar novamente',
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (_) => const QuizzScreen()),
@@ -60,9 +80,8 @@ class _ScoreScreenState extends State<ScoreScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              //SecondaryButton
               SecondaryButton(
-                label: 'Exit',
+                label: 'Sair',
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (_) => const LoginScreen()),

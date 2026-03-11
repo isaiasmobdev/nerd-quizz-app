@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:firebaseopensource.com)",
+      "Bash(gcloud beta services mcp enable firestore.googleapis.com --project=nerd-quizz)"
+    ]
+  }
+}

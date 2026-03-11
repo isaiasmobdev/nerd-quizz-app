@@ -1,6 +1,10 @@
 // lib/auth_provider.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const _keyRememberMe = 'remember_me';
+const _keyEmail = 'saved_email';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -8,15 +12,42 @@ class AuthProvider extends ChangeNotifier {
   bool _rememberMe = false;
   bool _isLoading = false;
   String? _errorMessage;
+  String _savedEmail = '';
 
   // Getters
   bool get rememberMe => _rememberMe;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+  String get savedEmail => _savedEmail;
 
-  void setRememberMe(bool novoValor) {
-    _rememberMe = novoValor;
+  AuthProvider() {
+    _loadPreferences();
+  }
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    _rememberMe = prefs.getBool(_keyRememberMe) ?? false;
+    _savedEmail = _rememberMe ? (prefs.getString(_keyEmail) ?? '') : '';
     notifyListeners();
+  }
+
+  Future<void> setRememberMe(bool novoValor) async {
+    _rememberMe = novoValor;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyRememberMe, novoValor);
+    if (!novoValor) {
+      await prefs.remove(_keyEmail);
+      _savedEmail = '';
+    }
+    notifyListeners();
+  }
+
+  Future<void> _persistEmailIfNeeded(String email) async {
+    if (_rememberMe) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_keyEmail, email);
+      _savedEmail = email;
+    }
   }
 
   // FUNÇÃO 1: CRIAR CONTA (Sign Up)
@@ -31,6 +62,7 @@ class AuthProvider extends ChangeNotifier {
         email: email.trim(),
         password: password.trim(),
       );
+      await _persistEmailIfNeeded(email.trim());
       onSuccess?.call();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -60,6 +92,7 @@ class AuthProvider extends ChangeNotifier {
         email: email.trim(),
         password: password.trim(),
       );
+      await _persistEmailIfNeeded(email.trim());
       onSuccess?.call();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {

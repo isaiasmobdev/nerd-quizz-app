@@ -1,29 +1,8 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // Bloqueia tudo por padrão
     match /{document=**} {
-      allow read, write: if false;
-    }
-
-    // Usuários só podem ler/escrever seus próprios dados
-    match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-    }
-
-    // Perguntas do quiz: qualquer usuário autenticado pode ler, apenas admins escrevem
-    match /questions/{questionId} {
-      allow read: if request.auth != null;
-      allow write: if false; // gerenciar via Firebase Console ou Cloud Functions
-    }
-
-    // Pontuações: usuário autenticado pode ler/criar a própria pontuação
-    match /scores/{scoreId} {
-      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
-      allow update, delete: if false;
+      allow read, write: if true;
     }
   }
 }

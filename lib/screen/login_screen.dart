@@ -22,6 +22,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final savedEmail = context.read<AuthProvider>().savedEmail;
+      if (savedEmail.isNotEmpty) {
+        emailController.text = savedEmail;
+      }
+    });
+  }
+
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
@@ -73,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 // CHECKBOX
                 CheckBoxCustom(
-                  label: 'Remember me',
+                  label: 'Lembrar de mim',
                   value: authProvider.rememberMe, // Valor vem do provider
                   onChanged: (novoValor) {
                     // Avisa o provider para mudar (sem setState!)
