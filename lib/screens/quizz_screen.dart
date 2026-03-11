@@ -1,14 +1,15 @@
+// lib/screens/quizz_screen.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nerd_quizz_flutter_final/components/buttons.dart';
 import 'package:nerd_quizz_flutter_final/components/quiz_option_card.dart';
 import 'package:nerd_quizz_flutter_final/components/quiz_timer_bar.dart';
 import 'package:nerd_quizz_flutter_final/models/question_model.dart';
-import 'package:nerd_quizz_flutter_final/screen/score_screen.dart';
-import 'package:nerd_quizz_flutter_final/screen/login_screen.dart';
+import 'package:nerd_quizz_flutter_final/screens/score_screen.dart';
+import 'package:nerd_quizz_flutter_final/screens/login_screen.dart';
 import 'package:nerd_quizz_flutter_final/services/firestore_service.dart';
 import 'package:nerd_quizz_flutter_final/shared/app_colors.dart';
-import 'package:nerd_quizz_flutter_final/shared/ui.helpers.dart';
+import 'package:nerd_quizz_flutter_final/shared/ui_helpers.dart';
 
 class QuizzScreen extends StatefulWidget {
   const QuizzScreen({super.key});

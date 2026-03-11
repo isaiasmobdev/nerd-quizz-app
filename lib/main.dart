@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nerd_quizz_flutter_final/auth_provider.dart'; // Importe o AuthProvider
-import 'package:nerd_quizz_flutter_final/screen/login_screen.dart';
+import 'package:nerd_quizz_flutter_final/providers/auth_provider.dart';
+import 'package:nerd_quizz_flutter_final/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart'; // 1. Importe o Firebase Core
 import 'firebase_options.dart'; // 2. Importe o arquivo que foi criado

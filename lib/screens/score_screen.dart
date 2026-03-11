@@ -1,9 +1,10 @@
+// lib/screens/score_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nerd_quizz_flutter_final/components/buttons.dart';
-import 'package:nerd_quizz_flutter_final/screen/login_screen.dart';
-import 'package:nerd_quizz_flutter_final/screen/quizz_screen.dart';
+import 'package:nerd_quizz_flutter_final/screens/login_screen.dart';
+import 'package:nerd_quizz_flutter_final/screens/quizz_screen.dart';
 import 'package:nerd_quizz_flutter_final/shared/app_colors.dart';
 
 class ScoreScreen extends StatefulWidget {

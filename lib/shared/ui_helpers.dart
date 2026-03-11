@@ -1,22 +1,17 @@
+// lib/shared/ui_helpers.dart
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'; // Precisamos de ambos os pacotes
+import 'package:flutter/cupertino.dart';
 
-// Esta é a função que sua QuizzScreen está tentando chamar.
-// Note que ela retorna um Future<bool?>
-// bool? = Pode ser true (Sim), false (Não), ou null (fechou clicando fora)
 Future<bool?> showAdaptiveConfirmationDialog({
   required BuildContext context,
   required String title,
   required String content,
-  String positiveButtonLabel = 'Sim', // Valor padrão
-  String negativeButtonLabel = 'Não', // Valor padrão
+  String positiveButtonLabel = 'Sim',
+  String negativeButtonLabel = 'Não',
 }) async {
-  // 1. Verificamos qual é a plataforma atual
   final platform = Theme.of(context).platform;
 
-  // 2. Verificamos se é iOS para mostrar o CupertinoAlertDialog
   if (platform == TargetPlatform.iOS || platform == TargetPlatform.macOS) {
-    // Para iOS, usamos 'showCupertinoDialog'
     return showCupertinoDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -24,19 +19,17 @@ Future<bool?> showAdaptiveConfirmationDialog({
           title: Text(title),
           content: Text(content),
           actions: [
-            // Botão Negativo (iOS)
             CupertinoDialogAction(
               child: Text(negativeButtonLabel),
               onPressed: () {
-                Navigator.of(context).pop(false); // Retorna 'false'
+                Navigator.of(context).pop(false);
               },
             ),
-            // Botão Positivo (iOS)
             CupertinoDialogAction(
               isDefaultAction: true,
               child: Text(positiveButtonLabel),
               onPressed: () {
-                Navigator.of(context).pop(true); // Retorna 'true'
+                Navigator.of(context).pop(true);
               },
             ),
           ],
@@ -44,7 +37,6 @@ Future<bool?> showAdaptiveConfirmationDialog({
       },
     );
   } else {
-    // 3. Para Android (e outros), usamos 'showDialog' com AlertDialog
     return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -52,18 +44,16 @@ Future<bool?> showAdaptiveConfirmationDialog({
           title: Text(title),
           content: Text(content),
           actions: [
-            // Botão Negativo (Android)
             TextButton(
               child: Text(negativeButtonLabel),
               onPressed: () {
-                Navigator.of(context).pop(false); // Retorna 'false'
+                Navigator.of(context).pop(false);
               },
             ),
-            // Botão Positivo (Android)
             TextButton(
               child: Text(positiveButtonLabel),
               onPressed: () {
-                Navigator.of(context).pop(true); // Retorna 'true'
+                Navigator.of(context).pop(true);
               },
             ),
           ],
