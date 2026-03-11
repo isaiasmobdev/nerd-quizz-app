@@ -125,7 +125,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                 foregroundColor: AppColors.white,
               ),
               child: Text(
-                'Pular',
+                'Desistir',
                 style: GoogleFonts.urbanist(
                   color: AppColors.white,
                   fontSize: 16,
