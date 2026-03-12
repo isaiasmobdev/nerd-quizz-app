@@ -1,5 +1,5 @@
 # Nerd Quizz App
-![Capa do Projeto](https://github.com/isaias0cardoso/piano-app-flutter/blob/main/Piano%20App.png)
+![Capa do Projeto](https://raw.githubusercontent.com/isaiasmobdev/nerd-quizz-app/refs/heads/main/Nerd%20Quizz.png)
 
 A interactive trivia and quiz application built with **Flutter** and powered by **Firebase**. 
 This app fetches dynamic quiz questions directly from Firestore, tracks user progress with localized timers, and calculates scores based on correct answers.
