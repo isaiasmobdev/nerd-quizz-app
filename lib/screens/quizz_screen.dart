@@ -41,8 +41,8 @@ class _QuizzScreenState extends State<QuizzScreen> {
         _isLoading = false;
       });
     } catch (e, stackTrace) {
-      print('Erro ao carregar questoes: $e');
-      print(stackTrace);
+      debugPrint('Erro ao carregar questoes: $e');
+      debugPrint('$stackTrace');
       setState(() {
         _isLoading = false;
       });
@@ -58,7 +58,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
       negativeButtonLabel: 'Ficar',
     );
 
-    if (shouldGoToLogin == true && context.mounted) {
+    if (shouldGoToLogin == true && mounted) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const LoginScreen()),
         (route) => false,
